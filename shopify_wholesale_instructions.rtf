@@ -1,72 +1,66 @@
-{\rtf1\ansi\ansicpg1252\cocoartf1138\cocoasubrtf510
-{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
-{\colortbl;\red255\green255\blue255;}
-\margl1440\margr1440\vieww10800\viewh8400\viewkind0
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+Steps
 
-\f0\fs24 \cf0 Steps\
-\
-Add Tag: "Wholesale" to selected wholesale customer accounts\
-\
-Create a new collection called "Wholesale" then write your description. At the end of the description I like to add a little notice saying "You must have a wholesale account with our store to view wholesale pricing."  OR For a more dynamic solution, scroll down to the code for collection.liquid\
-\
-For every product - Create a duplicate product with wholesale price. I used the same title and then added "(Wholesale)" to the end of the product title.\
-\
-Optional Page (recommended)\
-	Create a page called "Wholesale Accounts" or "Wholesale" or whatever. Have a little blurb about your requirements for wholesale access. And I like to include either contact info for them to reach you, or a form with whatever information you need (Tax ID's, Location, Annual Sales, etc.) to be sure you're offering wholesale pricing to the right people. \
-\
-Now for the code!\
-\
-In your theme.liquid, paste the following code before the closing </body> tag:\
-\
-  <script>\
-      $(function() \{\
-        $wholesalehide = $(".product > div:contains('Wholesale')").closest(".product").detach(); // Create jQuery object and remove wholesale items for all users\
-        $(".browse-tags").css("display", "none"); // Optional\
-        \
-        \{% if customer.tags contains 'Wholesale' %\}\
-            $("#collection > .products").append($wholesalehide); // Append wholesale items into the "products" row for logged in wholesale customers.\
-          var url = window.location.href;\
-             if (url.search("collections/all") >= 0) \{ // Will only execute the following code if the user is on the main collection page\
-               $('.title:contains("Chainmail Dishcloth for Your Finest Pots and Pans (Wholesale)")').closest(".product").addClass("clearit");\
-           \}; // The above code adds a clearing class to the parent product div that matches the text string in "contains"\
-        \{% endif %\} \
-        \
-       var url = window.location.href;\
-\
-       if (url.search("products/") >= 0) \{\
-         $('h1.title:contains("(Wholesale)")').closest("#content").addClass("wholesale-hd"); // Hide wholesale items for all users who type in direct url to products. Enter product URL's in above line\
-       \} \
-       \{% if customer.tags contains 'Wholesale' %\}\
-           $("#product").removeClass("wholesale-hd"); // Show wholesale products for logged in wholesale customers.\
-       \{% endif %\}  \
-      \});\
-  </script>\
-\
-In your styles.css.liquid, add the following:\
-\
-.wholesale-hd \{ display: none; \}\
-.clearit \{ clear: both; \}\
-\
-(Optional) In your collection.liquid find the "Begin collection description" comment. I replaced that whole section with this:\
-\
-      <!-- Begin collection description -->\
-      \{% if collection.description != "" %\}\
-        \{% if collection.handle == "wholesale" %\}\
-          \{% if customer.tags contains "Wholesale" %\}\
-            \{\{ collection.description \}\}            \
-          \{% else %\}\
-            \{\{ collection.description \}\}\
-      		<p>You must be logged in to view wholesale pricing.</p>\
-          \{% endif %\}\
-        \{% endif %\}\
-        \{% if collection.handle != "wholesale" %\}\
-          \{\{ collection.description \}\}\
-        \{% endif %\}\
-      \{% endif %\}\
-      <!-- End collection description -->\
-\
-This code basically adds the blurb "You must be logged in to view wholesale pricing." in a more dynamic way, so wholesale account holders don't have to see it every time they are viewing the collection.\
-\
-Wholesale Collection Description\
-	<span style="display:none;"></span>}
+Add Tag: "Wholesale" to selected wholesale customer accounts
+
+Create a new collection called "Wholesale" then write your description. At the end of the description I like to add a little notice saying "You must have a wholesale account with our store to view wholesale pricing."  OR For a more dynamic solution, scroll down to the code for collection.liquid
+
+For every product - Create a duplicate product with wholesale price. I used the same title and then added "(Wholesale)" to the end of the product title.
+
+Optional Page (recommended)
+	Create a page called "Wholesale Accounts" or "Wholesale" or whatever. Have a little blurb about your requirements for wholesale access. And I like to include either contact info for them to reach you, or a form with whatever information you need (Tax ID's, Location, Annual Sales, etc.) to be sure you're offering wholesale pricing to the right people. 
+
+Now for the code!
+
+In your theme.liquid, paste the following code before the closing </body> tag:
+
+  <script>
+      $(function() {
+        $wholesalehide = $(".product > div:contains('Wholesale')").closest(".product").detach(); // Create jQuery object and remove wholesale items for all users
+        $(".browse-tags").css("display", "none"); // Optional
+        
+        {% if customer.tags contains 'Wholesale' %}
+            $("#collection > .products").append($wholesalehide); // Append wholesale items into the "products" row for logged in wholesale customers.
+          var url = window.location.href;
+             if (url.search("collections/all") >= 0) { // Will only execute the following code if the user is on the main collection page
+               $('.title:contains("Chainmail Dishcloth for Your Finest Pots and Pans (Wholesale)")').closest(".product").addClass("clearit");
+           }; // The above code adds a clearing class to the parent product div that matches the text string in "contains"
+        {% endif %} 
+        
+       var url = window.location.href;
+
+       if (url.search("products/") >= 0) {
+         $('h1.title:contains("(Wholesale)")').closest("#content").addClass("wholesale-hd"); // Hide wholesale items for all users who type in direct url to products. Enter product URL's in above line
+       } 
+       {% if customer.tags contains 'Wholesale' %}
+           $("#product").removeClass("wholesale-hd"); // Show wholesale products for logged in wholesale customers.
+       {% endif %}  
+      });
+  </script>
+
+In your styles.css.liquid, add the following:
+
+.wholesale-hd { display: none; }
+.clearit { clear: both; }
+
+(Optional) In your collection.liquid find the "Begin collection description" comment. I replaced that whole section with this:
+
+      <!-- Begin collection description -->
+      {% if collection.description != "" %}
+        {% if collection.handle == "wholesale" %}
+          {% if customer.tags contains "Wholesale" %}
+            {{ collection.description }}            
+          {% else %}
+            {{ collection.description }}
+      		<p>You must be logged in to view wholesale pricing.</p>
+          {% endif %}
+        {% endif %}
+        {% if collection.handle != "wholesale" %}
+          {{ collection.description }}
+        {% endif %}
+      {% endif %}
+      <!-- End collection description -->
+
+This code basically adds the blurb "You must be logged in to view wholesale pricing." in a more dynamic way, so wholesale account holders don't have to see it every time they are viewing the collection.
+
+Wholesale Collection Description
+	<span style="display:none;"></span>
