@@ -1,4 +1,5 @@
   <script>
+  
       $(function() {
         $wholesalehide = $(".product > div:contains('Wholesale')").closest(".product").detach(); // Create jQuery object and remove wholesale items for all users. (NOTE: Exact DOM path varies by site/theme)
         $(".browse-tags").css("display", "none"); // Optional
@@ -19,8 +20,6 @@
        {% if customer.tags contains 'Wholesale' %}
            $("#product").removeClass("wholesale-hd"); // Show wholesale products for logged in wholesale customers.
        {% endif %}  
-
-
       });
 
   </script>
