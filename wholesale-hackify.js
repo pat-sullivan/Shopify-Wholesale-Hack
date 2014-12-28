@@ -9,7 +9,7 @@
           var url = window.location.href;
              if (url.search("collections/all") >= 0) { // Will only execute the following code if the user is on the main collection page
                $('.title:contains("YOUR WHOLESALE PRODUCT TITLE")').closest(".product").addClass("clearit");
-           }; // The above code adds a clearing class to the parent product div that matches the text string in "contains"
+           }; // The above code adds a clearing class to the parent product div that matches the text string in "contains". It may not be necessary for your code.
         {% endif %} 
         
        var url = window.location.href;
