@@ -1,3 +1,5 @@
+Simple Javascript for Shopify that searches for the customer tag "Wholesale" | If found, it will show wholesale products from the store, [Works best when you add a wholesale version of the same product but add '(Wholsale)' to the product title]. If the customer tag is not found, the script will remove the wholesale products from the DOM.
+
 Steps
 
 Add Tag: "Wholesale" to selected wholesale customer accounts
@@ -22,7 +24,7 @@ In your theme.liquid, paste the following code before the closing </body> tag:
             $("#collection > .products").append($wholesalehide); // Append wholesale items into the "products" row for logged in wholesale customers.
           var url = window.location.href;
              if (url.search("collections/all") >= 0) { // Will only execute the following code if the user is on the main collection page
-               $('.title:contains("Chainmail Dishcloth for Your Finest Pots and Pans (Wholesale)")').closest(".product").addClass("clearit");
+               $('.title:contains("YOUR WHOLESALE PRODUCT TITLE")').closest(".product").addClass("clearit");// Replace the all caps text to your needs
            }; // The above code adds a clearing class to the parent product div that matches the text string in "contains"
         {% endif %} 
         
@@ -32,7 +34,7 @@ In your theme.liquid, paste the following code before the closing </body> tag:
          $('h1.title:contains("(Wholesale)")').closest("#content").addClass("wholesale-hd"); // Hide wholesale items for all users who type in direct url to products. Enter product URL's in above line
        } 
        {% if customer.tags contains 'Wholesale' %}
-           $("#product").removeClass("wholesale-hd"); // Show wholesale products for logged in wholesale customers.
+           $("#product").removeClass("wholesale-hd"); // Show wholesale products for logged-in wholesale customers.
        {% endif %}  
       });
   </script>
@@ -60,7 +62,7 @@ In your styles.css.liquid, add the following:
       {% endif %}
       <!-- End collection description -->
 
-This code basically adds the blurb "You must be logged in to view wholesale pricing." in a more dynamic way, so wholesale account holders don't have to see it every time they are viewing the collection.
+The above code basically adds the blurb "You must be logged in to view wholesale pricing." in a more dynamic way, so wholesale account holders don't have to see it every time they are viewing the collection.
 
 Wholesale Collection Description
 	<span style="display:none;"></span>
