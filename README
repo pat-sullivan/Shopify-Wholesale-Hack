@@ -1,3 +1,6 @@
+*** DO NOT USE / THIS IS OUTDATED (and was probably never the best approach) ***
+Shopify has evolved a lot since this was written and new plugins and methods are available
+
 Simple Javascript for Shopify that searches for the customer tag "Wholesale" | If found, it will show wholesale products from the store, [Works best when you add a wholesale version of the same product but add '(Wholsale)' to the product title]. If the customer tag is not found, the script will remove the wholesale products from the DOM.
 
 Steps
